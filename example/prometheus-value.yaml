@@ -1,0 +1,77 @@
+defaultRules:
+  create: true
+  rules:
+    alertmanager: true
+    etcd: false
+    general: true
+    k8s: false
+    kubeApiserver: false
+    kubeApiserverAvailability: false
+    kubeApiserverError: false
+    kubeApiserverSlos: false
+    kubelet: false
+    kubePrometheusGeneral: false
+    kubePrometheusNodeAlerting: false
+    kubePrometheusNodeRecording: false
+    kubernetesAbsent: false
+    kubernetesApps: true
+    kubernetesResources: false
+    kubernetesStorage: true
+    kubernetesSystem: false
+    kubeScheduler: false
+    kubeStateMetrics: false
+    network: false
+    node: false
+    prometheus: true
+    prometheusOperator: true
+    time: true
+  appNamespacesTarget: "metrics"
+
+kubeApiserver:
+  enabled: false
+
+kubelet:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+coreDns:
+  enabled: false
+
+kubeDns:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeProxy:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
+prometheus:
+  # additionalServiceMonitors:
+  #   - name: "metrics-service"
+  #     selector: {}
+  #     namespaceSelector:
+  #       matchNames:
+  #         - metrics
+  #     endpoints: []
+  additionalPodMonitors:
+    - name: "metrics-pod"
+      selector: {}
+        # matchLabels:
+        #   dummy-key: dummy-value
+      namespaceSelector:
+        matchNames:
+          - metrics
+      podMetricsEndpoints:
+        - port: custom-port
+          path: /metrics
+          scheme: "http"
+      # podTargetLabels: {}
